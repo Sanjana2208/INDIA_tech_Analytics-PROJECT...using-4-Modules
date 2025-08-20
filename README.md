@@ -215,5 +215,52 @@ print("Garbage Monitoring Accuracy:", accuracy_score(y_test, y_pred))
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+❤️ Module 4: Personal Health Monitoring via Smartphone Sensors
 
 
+python
+heart_rate = np.random.randint(60, 150, 100)
+motion_level = np.random.uniform(0.1, 2.0, 100)
+✅ Why: Simulates health sensor data.
+
+📌 Used for: Creating input features.
+
+
+python
+status = ['Normal' if hr < 90 else 'Warning' if hr < 120 else 'Critical' for hr in heart_rate]
+✅ Why: Assigns health status based on heart rate.
+
+📌 Used for: Creating target labels.
+
+
+
+python
+df = pd.DataFrame({...})
+df['StatusLabel'] = df['Status'].map({'Normal': 0, 'Warning': 1, 'Critical': 2})
+✅ Why: Structures and encodes data.
+
+📌 Used for: ML compatibility.
+
+
+python
+X = df[['HeartRate', 'MotionLevel']]
+y = df['StatusLabel']
+X_scaled = StandardScaler().fit_transform(X)
+✅ Why: Normalizes features.
+
+📌 Used for: Improving KNN performance.
+
+
+
+python
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2)
+model = KNeighborsClassifier(n_neighbors=4)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print("Health Monitoring Accuracy:", accuracy_score(y_test, y_pred))
+print(classification_report(y_test, y_pred))
+✅ Why: Trains and evaluates the model.
+
+📌 Used for: Predicting health status.
+
+------------------------------------------------------....................................................------------------------------------------------------------
