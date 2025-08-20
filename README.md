@@ -166,5 +166,54 @@ plt.show()
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+🗑️ Module 3: Garbage Level Monitoring System
+
+python
+distance = np.random.uniform(5, 50, 100)
+✅ Why: Simulates ultrasonic sensor readings.
+
+📌 Used for: Measuring garbage bin fill level.
+
+
+
+python
+status = ['Full' if d < 15 else 'Half' if d < 30 else 'Empty' for d in distance]
+✅ Why: Assigns bin status based on distance.
+
+📌 Used for: Creating target labels.
+
+
+
+python
+df = pd.DataFrame({...})
+df['StatusLabel'] = df['Status'].map({'Empty': 0, 'Half': 1, 'Full': 2})
+✅ Why: Structures and encodes data.
+
+📌 Used for: ML compatibility.
+
+
+python
+X = df[['Distance']]
+y = df['StatusLabel']
+X_scaled = MinMaxScaler().fit_transform(X)
+✅ Why: Normalizes feature to range [0,1].
+
+📌 Used for: Improving KNN accuracy.
+
+
+
+python
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2)
+model = KNeighborsClassifier(n_neighbors=3)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print("Garbage Monitoring Accuracy:", accuracy_score(y_test, y_pred))
+✅ Why: Trains and evaluates the model.
+
+📌 Used for: Predicting bin status.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
