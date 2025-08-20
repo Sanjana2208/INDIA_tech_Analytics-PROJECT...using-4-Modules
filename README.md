@@ -82,3 +82,89 @@ print("Tech Growth Accuracy:", accuracy_score(y_test, y_pred))
 •	📌 Used for: Showing how well the model performed.
 
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+🚦 Module 2: Smart Traffic Management Using ML
+python
+np.random.seed(0)
+✅ Why: Ensures reproducibility of random data.
+
+📌 Used for: Consistent simulation results.
+
+
+python
+vehicle_count = np.random.randint(50, 500, 100)
+avg_speed = np.random.randint(20, 80, 100)
+✅ Why: Simulates traffic data.
+
+📌 Used for: Creating realistic input features.
+
+
+
+python
+density = ['Low' if v < 150 else 'Medium' if v < 300 else 'High' for v in vehicle_count]
+✅ Why: Assigns traffic density labels based on vehicle count.
+
+📌 Used for: Creating target labels.
+
+python
+df = pd.DataFrame({...})
+✅ Why: Combines features and labels into a DataFrame.
+
+📌 Used for: Structured data handling.
+
+
+
+python
+df['DensityLabel'] = df['Density'].map({'Low': 0, 'Medium': 1, 'High': 2})
+✅ Why: Converts string labels to numeric.
+
+📌 Used for: Compatibility with ML algorithms.
+
+python
+X = df[['VehicleCount', 'AvgSpeed']]
+y = df['DensityLabel']
+✅ Why: Separates features and target.
+
+📌 Used for: Model training.
+
+
+
+python
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+✅ Why: Splits data for training/testing.
+
+📌 Used for: Model evaluation.
+
+python
+model = KNeighborsClassifier(n_neighbors=5)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+✅ Why: Trains and predicts using KNN.
+
+📌 Used for: Traffic density classification.
+
+
+
+python
+print("Traffic Accuracy:", accuracy_score(y_test, y_pred))
+print(classification_report(y_test, y_pred))
+✅ Why: Evaluates model performance.
+
+📌 Used for: Showing precision, recall, and f1-score.
+
+
+
+python
+sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d')
+plt.title("Traffic Density Confusion Matrix")
+plt.show()
+✅ Why: Visualizes prediction results.
+
+📌 Used for: Understanding model errors.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
