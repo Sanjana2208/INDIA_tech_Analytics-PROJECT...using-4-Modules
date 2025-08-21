@@ -85,6 +85,8 @@ print("Tech Growth Accuracy:", accuracy_score(y_test, y_pred))
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 🚦 Module 2: Smart Traffic Management Using ML
+
+
 python
 np.random.seed(0)
 ✅ Why: Ensures reproducibility of random data.
