@@ -7,6 +7,8 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+
+#📊 Module 1: Technological Growth Analysis Across Indian States
 def tech_growth_analysis():
     print("\n📊 Technological Growth Analysis Across Indian States")
     data = {
@@ -28,6 +30,9 @@ def tech_growth_analysis():
     y_pred = model.predict(X_test)
     print("Accuracy:", accuracy_score(y_test, y_pred))
 
+#...................................................................................................................
+
+#🚦 Module 2: Smart Traffic Management Using ML
 def smart_traffic_management():
     print("\n🚦 Smart Traffic Management Using ML")
     np.random.seed(0)
@@ -51,6 +56,9 @@ def smart_traffic_management():
     plt.title("Traffic Density Confusion Matrix")
     plt.show()
 
+#...............................................................................................................................
+
+#🗑️ Module 3: Garbage Level Monitoring System
 def garbage_monitoring():
     print("\n🗑️ Garbage Level Monitoring System")
     np.random.seed(1)
@@ -70,6 +78,10 @@ def garbage_monitoring():
     y_pred = model.predict(X_test)
     print("Accuracy:", accuracy_score(y_test, y_pred))
 
+#.............................................................................................................
+
+
+#❤️ Module 4: Personal Health Monitoring via Smartphone Sensors
 def health_monitoring():
     print("\n❤️ Personal Health Monitoring Using Smartphone Sensors")
     np.random.seed(2)
@@ -90,6 +102,8 @@ def health_monitoring():
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
     print(classification_report(y_test, y_pred))
+
+#........................................................................................................................................
 
 def main_menu():
     while True:
@@ -116,3 +130,5 @@ def main_menu():
 
 if __name__ == "__main__":
     main_menu()
+
+#............................................................................................................................
