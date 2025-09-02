@@ -1,16 +1,18 @@
+import streamlit as st
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+st.set_page_config(page_title="Smart India Dashboard", layout="wide")
 
 #📊 Module 1: Technological Growth Analysis Across Indian States
 def tech_growth_analysis():
-    print("\n📊 Technological Growth Analysis Across Indian States")
+    st.header("📊 Technological Growth Analysis Across Indian States")
     data = {
         'State': ['Karnataka', 'Maharashtra', 'Tamil Nadu', 'Telangana', 'Kerala',
                   'Gujarat', 'Delhi', 'Punjab', 'Rajasthan', 'Uttar Pradesh',
@@ -21,6 +23,8 @@ def tech_growth_analysis():
         'Label': [1,1,1,1,1,1,1,0,0,0,0,0,0,0,0]
     }
     df = pd.DataFrame(data)
+    st.dataframe(df)
+
     X = df[['Startups', 'TechParks', 'R&D_Centers']]
     y = df['Label']
     X_scaled = StandardScaler().fit_transform(X)
@@ -28,13 +32,16 @@ def tech_growth_analysis():
     model = KNeighborsClassifier(n_neighbors=3)
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
-    print("Accuracy:", accuracy_score(y_test, y_pred))
 
-#...................................................................................................................
+    st.metric("Model Accuracy", f"{accuracy_score(y_test, y_pred):.2f}")
+    st.write("Confusion Matrix:")
+    fig, ax = plt.subplots()
+    sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d', ax=ax)
+    st.pyplot(fig)
 
 #🚦 Module 2: Smart Traffic Management Using ML
 def smart_traffic_management():
-    print("\n🚦 Smart Traffic Management Using ML")
+    st.header("🚦 Smart Traffic Management Using ML")
     np.random.seed(0)
     vehicle_count = np.random.randint(50, 500, 100)
     avg_speed = np.random.randint(20, 80, 100)
@@ -45,45 +52,26 @@ def smart_traffic_management():
         'Density': density
     })
     df['DensityLabel'] = df['Density'].map({'Low': 0, 'Medium': 1, 'High': 2})
+    st.dataframe(df.head())
+
     X = df[['VehicleCount', 'AvgSpeed']]
     y = df['DensityLabel']
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
     model = KNeighborsClassifier(n_neighbors=5)
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
-    print(classification_report(y_test, y_pred))
-    sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d')
-    plt.title("Traffic Density Confusion Matrix")
-    plt.show()
 
-#...............................................................................................................................
+    st.text("Classification Report:")
+    st.code(classification_report(y_test, y_pred))
 
-#🗑️ Module 3: Garbage Level Monitoring System
-def garbage_monitoring():
-    print("\n🗑️ Garbage Level Monitoring System")
-    np.random.seed(1)
-    distance = np.random.uniform(5, 50, 100)
-    status = ['Full' if d < 15 else 'Half' if d < 30 else 'Empty' for d in distance]
-    df = pd.DataFrame({
-        'Distance': distance,
-        'Status': status
-    })
-    df['StatusLabel'] = df['Status'].map({'Empty': 0, 'Half': 1, 'Full': 2})
-    X = df[['Distance']]
-    y = df['StatusLabel']
-    X_scaled = MinMaxScaler().fit_transform(X)
-    X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2)
-    model = KNeighborsClassifier(n_neighbors=3)
-    model.fit(X_train, y_train)
-    y_pred = model.predict(X_test)
-    print("Accuracy:", accuracy_score(y_test, y_pred))
+    fig, ax = plt.subplots()
+    sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d', ax=ax)
+    ax.set_title("Traffic Density Confusion Matrix")
+    st.pyplot(fig)
 
-#.............................................................................................................
-
-
-#❤️ Module 4: Personal Health Monitoring via Smartphone Sensors
+#❤️ Module 3: Personal Health Monitoring via Smartphone Sensors
 def health_monitoring():
-    print("\n❤️ Personal Health Monitoring Using Smartphone Sensors")
+    st.header("❤️ Personal Health Monitoring Using Smartphone Sensors")
     np.random.seed(2)
     heart_rate = np.random.randint(60, 150, 100)
     motion_level = np.random.uniform(0.1, 2.0, 100)
@@ -94,6 +82,8 @@ def health_monitoring():
         'Status': status
     })
     df['StatusLabel'] = df['Status'].map({'Normal': 0, 'Warning': 1, 'Critical': 2})
+    st.dataframe(df.head())
+
     X = df[['HeartRate', 'MotionLevel']]
     y = df['StatusLabel']
     X_scaled = StandardScaler().fit_transform(X)
@@ -101,34 +91,21 @@ def health_monitoring():
     model = KNeighborsClassifier(n_neighbors=4)
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
-    print(classification_report(y_test, y_pred))
 
-#........................................................................................................................................
+    st.text("Classification Report:")
+    st.code(classification_report(y_test, y_pred))
 
-def main_menu():
-    while True:
-        print("\n📌 Select a Module to Run:")
-        print("1. Technological Growth Analysis")
-        print("2. Smart Traffic Management")
-        print("3. Garbage Level Monitoring")
-        print("4. Personal Health Monitoring")
-        print("5. Exit")
-        choice = input("Enter your choice (1-5): ")
-        if choice == '1':
-            tech_growth_analysis()
-        elif choice == '2':
-            smart_traffic_management()
-        elif choice == '3':
-            garbage_monitoring()
-        elif choice == '4':
-            health_monitoring()
-        elif choice == '5':
-            print("Exiting... 🚪")
-            break
-        else:
-            print("Invalid choice. Try again.")
+# Sidebar Navigation
+st.sidebar.title("📌 Select a Module")
+module = st.sidebar.radio("Choose one:", [
+    "Technological Growth Analysis",
+    "Smart Traffic Management",
+    "Personal Health Monitoring"
+])
 
-if __name__ == "__main__":
-    main_menu()
-
-#............................................................................................................................
+if module == "Technological Growth Analysis":
+    tech_growth_analysis()
+elif module == "Smart Traffic Management":
+    smart_traffic_management()
+elif module == "Personal Health Monitoring":
+    health_monitoring()
