@@ -265,3 +265,18 @@ print(classification_report(y_test, y_pred))
 
 📌 Used for: Predicting health status.
 ------------------------------------------------------....................................................------------------------------------------------------------
+
+Category	: Best Practices
+Objective	 : Ensure resume is machine‑readable, keyword‑optimized, and recruiter‑friendly.
+Font Style	 : Use standard fonts: Arial, Calibri, Times New Roman, Verdana.
+Font Size	 : 10–12 pt for body text; 14–16 pt for headings.
+Margins	 : Keep 1 inch (2.54 cm) on all sides.
+File Format	: Save as Word (.docx) or PDF (if ATS supports). Avoid scanned images.
+Structure	 : Reverse chronological order (latest experience first).
+Section Headings : 	Use standard titles: Summary, Work Experience, Education, Skills, Projects, Certifications.
+Keywords	: Match job description keywords; include tools, skills, certifications.
+Content Style : 	Use action verbs (Developed, Automated, Analyzed); quantify achievements.
+Design	: Simple layout; black text on white background; avoid graphics, logos, tables.
+Contact Info	 : Place at top: Name, Phone, Email, LinkedIn. Avoid icons/images.
+Length	: 1–2 pages depending on experience.
+Outcome	: Resume passes ATS screening, highlights skills, and looks professional to recruiters.
